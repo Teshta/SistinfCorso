@@ -7,6 +7,6 @@
 		<li class="nav-item"><a class="nav-link"
 			href="${pageContext.servletContext.contextPath}/jsp/cerca.jsp">Profilo</a></li>
 		<li><li class="nav-item"><c:if test="${empty USER.nome}"><a class="nav-link" href="${pageContext.servletContext.contextPath}/jsp/login.jsp">Login</a></c:if></li>
-		<li class="nav-item"><c:if test="${USER.nome}"><a class="nav-link" href="${pageContext.servletContext.contextPath}/logout">Log Out</a></c:if></li>
+		<li class="nav-item"><c:if test="${!empty USER.nome}"><a class="nav-link" href="${pageContext.servletContext.contextPath}/logout">Log Out</a></c:if></li>
 	</ul>
 </nav>
