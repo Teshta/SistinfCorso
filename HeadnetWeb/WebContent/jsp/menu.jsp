@@ -5,7 +5,7 @@
 		<li class="nav-item active"><a class="nav-link"
 			href="${pageContext.servletContext.contextPath}/index.jsp">Home</a></li>
 		<li class="nav-item"><c:if test="${!empty USER.username}"><a class="nav-link"
-			href="${pageContext.servletContext.contextPath}/jsp/cerca.jsp">Profilo</a></c:if></li>
+			href="${pageContext.servletContext.contextPath}/jsp/profilo.jsp">Profilo</a></c:if></li>
 		<li><li class="nav-item"><c:if test="${empty USER.username}"><a class="nav-link" href="${pageContext.servletContext.contextPath}/jsp/login.jsp">Login</a></c:if></li>
 		<li class="nav-item"><c:if test="${!empty USER.username}"><a class="nav-link" href="${pageContext.servletContext.contextPath}/logout">Log Out</a></c:if></li>
 	</ul>

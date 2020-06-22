@@ -3,21 +3,15 @@ package it.sistinf.headnet.avo;
 import java.util.Date;
 
 public class UserVO {
-	 private String nome;
-	 private String cognome;
-	 private String username;
-	 public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	private String nome;
+	private String cognome;
+	private String username;
 	private String email;
-	 private String password;
-	 private Date dataDiNascita;
-	
-	 
-	 public String getNome() {
+	private String password;
+	private Date dataDiNascita;
+
+
+	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
@@ -47,6 +41,12 @@ public class UserVO {
 	public void setDataDiNascita(Date dataDiNascita) {
 		this.dataDiNascita = dataDiNascita;
 	}
-	 
-	 
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
 }
