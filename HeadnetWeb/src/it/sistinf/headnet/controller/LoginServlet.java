@@ -25,8 +25,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//manca controllo se l'utente è già loggato 
+ 
 		HttpSession sessione=request.getSession();
 		if(sessione.getAttribute("USER") != null)
 			request.getRequestDispatcher("index.jsp").forward(request, response);
