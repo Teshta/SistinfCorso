@@ -5,7 +5,14 @@ import java.util.Date;
 public class UserVO {
 	 private String nome;
 	 private String cognome;
-	 private String email;
+	 private String username;
+	 public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	private String email;
 	 private String password;
 	 private Date dataDiNascita;
 	

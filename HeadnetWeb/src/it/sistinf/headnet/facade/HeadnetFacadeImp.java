@@ -8,12 +8,12 @@ import it.sistinf.headnet.dao.HeadnetDao;
 public class HeadnetFacadeImp implements HeadnetFacade {
 
 	@Override
-	public UserVO cercaUtente(String email) {
+	public UserVO cercaUtente(String username) {
 		
 		new GestioneDriver().registraDriver();
 		UserVO trovato = null;
 		HeadnetDao dao = new HeadnetDao();
-		trovato = dao.cercaDipendenteVO(email);
+		trovato = dao.cercaDipendenteVO(username);
 		
 		return trovato;
 	}

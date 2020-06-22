@@ -10,6 +10,6 @@
 <body>
 <jsp:include page="/jsp/menu.jsp"></jsp:include>
 <jsp:include page="/jsp/messaggi.jsp"></jsp:include>
-	<h1>Benvenuti ${USER.nome}</h1>
+	<h1>Benvenuti ${USER.username}</h1>
 </body>
 </html>

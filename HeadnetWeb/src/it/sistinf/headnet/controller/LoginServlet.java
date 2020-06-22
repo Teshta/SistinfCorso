@@ -32,12 +32,12 @@ public class LoginServlet extends HttpServlet {
 		else{
 			boolean successo = false;
 			UserVO user = new UserVO();
-			String email = request.getParameter("email");
+			String username = request.getParameter("username");
 			String password = request.getParameter("password"); //non criptata
 			HeadnetFacade facade = new HeadnetFacadeImp();		
 
 			try {
-				user = facade.cercaUtente(email);
+				user = facade.cercaUtente(username);
 				if(password.equals(user.getPassword())){
 					sessione.setAttribute("USER", user);
 					request.setAttribute("MSG_CORRECT", "Login effettuato con successo");

@@ -26,6 +26,11 @@
 					name="cognome" value="${INSERENDO.cognome}">
 			</div>
 			<div class="form-group">
+				<label for="username">Username:</label> <input type="text"
+					class="form-control" placeholder="Inserisci username" id="username"
+					name="username" value="${INSERENDO.username}">
+			</div>
+			<div class="form-group">
 				<label for="email">Email:</label> <input type="email"
 					class="form-control" placeholder="Inserisci email"
 					id="email" name="email" value="${INSERENDO.email}">

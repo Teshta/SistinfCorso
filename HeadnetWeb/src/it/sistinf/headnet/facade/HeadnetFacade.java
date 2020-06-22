@@ -4,6 +4,6 @@ import it.sistinf.headnet.avo.UserVO;
 
 public interface HeadnetFacade {
 
-	UserVO cercaUtente(String email);
+	UserVO cercaUtente(String username);
 
 }
