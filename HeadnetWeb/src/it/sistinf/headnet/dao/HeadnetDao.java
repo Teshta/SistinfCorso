@@ -43,5 +43,28 @@ public class HeadnetDao extends GestioneConnessione {
 		}
 		return dip;
 	}
+	
+	
+	
+
+	public void registraUser(UserVO user) throws SQLException {
+		try {
+
+			connection = this.apriConnessione();
+			preparedStatement = connection.prepareStatement("INSERT INTO USERS (nome, cognome, email, password, dataDiNascita)" + " VALUES (?, ?, ?, ?, ?)");
+			preparedStatement.setString(1, user.getNome());
+			preparedStatement.setString(2, user.getCognome());
+			preparedStatement.setString(3, user.getPassword());
+			preparedStatement.setString(4, user.getDataDiNascita());
+			preparedStatement.executeUpdate();
+
+		}
+		catch(SQLException e) {
+			throw e;
+		} finally {
+			chiudiConnessione();
+		}
+
+	}
 
 }
