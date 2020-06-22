@@ -16,7 +16,7 @@
 			action="${pageContext.servletContext.contextPath}/login"
 			method="post" id="miaForm">
 			<div class="form-group">
-				<label for="username">Email:</label> <input type="text"
+				<label for="username">Username:</label> <input type="text"
 					class="form-control" placeholder="Inserisci username" id="username"
 					name="username" required>
 			</div>
