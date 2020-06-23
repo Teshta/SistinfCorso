@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 public class UserVO {
+	
+	private int id;
 	private String nome;
 	private String cognome;
 	private String username;
@@ -53,6 +55,12 @@ public class UserVO {
 	}
 	public void setPosts(List<PostVO> posts) {
 		this.posts = posts;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 

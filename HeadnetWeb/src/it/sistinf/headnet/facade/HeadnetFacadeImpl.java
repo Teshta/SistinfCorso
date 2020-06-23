@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import it.sistinf.headnet.dao.GestioneDriver;
 import it.sistinf.headnet.dao.HeadnetDao;
+import it.sistinf.headnet.vo.PostVO;
 import it.sistinf.headnet.vo.UserVO;
 
 public class HeadnetFacadeImpl implements HeadnetFacade {
@@ -40,5 +41,13 @@ public class HeadnetFacadeImpl implements HeadnetFacade {
 		HeadnetDao dao = new HeadnetDao();
 		trovato=dao.cercaUtente(nome, cognome);
 		return trovato;
+	}
+
+	@Override
+	public void inserisciPost(PostVO post) throws Exception {
+		new GestioneDriver().registraDriver();
+		HeadnetDao dao = new HeadnetDao();
+		dao.inserisciPost(post);
+		
 	}
 }

@@ -11,7 +11,7 @@
 	<jsp:include page="menu.jsp"></jsp:include>
 	<div class="container container-fluid">
 		<jsp:include page="messaggi.jsp"></jsp:include>
-		<h1>Login</h1>
+		<h1>Inserisci nuovo post</h1>
 		<form
 			action="${pageContext.servletContext.contextPath}/insert"
 			method="post" id="postForm">

@@ -4,12 +4,13 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import it.sistinf.headnet.vo.PostVO;
 import it.sistinf.headnet.vo.UserVO;
 
 public class HeadnetDao extends GestioneConnessione {
 
 	public UserVO cercaUsername(String username) throws Exception {
-		UserVO dip = new UserVO();
+		UserVO user = new UserVO();
 
 		try {
 
@@ -22,12 +23,13 @@ public class HeadnetDao extends GestioneConnessione {
 
 
 			while(resultSet.next()) { //resultSet il cursore punta prima della prima riga, quindi necessario il next
-				dip.setNome(resultSet.getString("nome"));
-				dip.setCognome(resultSet.getString("cognome"));
-				dip.setUsername(resultSet.getString("username"));
-				dip.setEmail(resultSet.getString("email"));
-				dip.setPassword(resultSet.getString("password"));
-				dip.setDataDiNascita(resultSet.getDate("dataDiNascita"));
+				user.setId(resultSet.getInt("user_id"));
+				user.setNome(resultSet.getString("nome"));
+				user.setCognome(resultSet.getString("cognome"));
+				user.setUsername(resultSet.getString("username"));
+				user.setEmail(resultSet.getString("email"));
+				user.setPassword(resultSet.getString("password"));
+				user.setDataDiNascita(resultSet.getDate("dataDiNascita"));
 				
 			}		
 
@@ -38,7 +40,7 @@ public class HeadnetDao extends GestioneConnessione {
 		} finally {
 			chiudiConnessione();
 		}
-		return dip;
+		return user;
 	}
 	
 
@@ -97,30 +99,51 @@ public class HeadnetDao extends GestioneConnessione {
 	}	
 
 
-	public List<UserVO> findAll() {
-		List<UserVO> listauser = new LinkedList<UserVO>(); 
+//	public List<UserVO> findAll() {
+//		List<UserVO> listauser = new LinkedList<UserVO>(); 
+//
+//		try {
+//			connection = this.apriConnessione();
+//			statement = connection.createStatement();
+//			String queryStr = "SELECT * FROM USER";
+//			resultSet = statement.executeQuery(queryStr);
+//
+//			while(resultSet.next()) {
+//				UserVO user = new UserVO();
+//				user.setNome(resultSet.getString("nome"));
+//				user.setEmail(resultSet.getString("email"));
+//				user.setDataDiNascita(resultSet.getDate("dataDiNascita"));
+//				user.setUsername(resultSet.getString("username"));
+//				listauser.add(user);
+//			}
+//		}
+//		catch(SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			chiudiConnessione();
+//		}
+//		return listauser;
+//	}
 
+
+	public void inserisciPost(PostVO post) throws Exception {
 		try {
-			connection = this.apriConnessione();
-			statement = connection.createStatement();
-			String queryStr = "SELECT * FROM USER";
-			resultSet = statement.executeQuery(queryStr);
 
-			while(resultSet.next()) {
-				UserVO user = new UserVO();
-				user.setNome(resultSet.getString("nome"));
-				user.setEmail(resultSet.getString("email"));
-				user.setDataDiNascita(resultSet.getDate("dataDiNascita"));
-				user.setUsername(resultSet.getString("username"));
-				listauser.add(user);
-			}
+			connection = this.apriConnessione();
+			preparedStatement = connection.prepareStatement("INSERT INTO POST (contenuto, dataPubblicazione, user_id) VALUES (?, ?, ?)");
+			preparedStatement.setString(1, post.getContenuto());
+			preparedStatement.setDate(2, new java.sql.Date(post.getDataPubblicazione().getTime()));
+			preparedStatement.setInt(3, post.getUser().getId());
+			
+			preparedStatement.executeUpdate();
+
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			chiudiConnessione();
 		}
-		return listauser;
+		
 	} 
 
 }
