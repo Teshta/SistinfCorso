@@ -1,6 +1,7 @@
-package it.sistinf.headnet.avo;
+package it.sistinf.headnet.vo;
 
 import java.util.Date;
+import java.util.List;
 
 public class UserVO {
 	private String nome;
@@ -9,7 +10,7 @@ public class UserVO {
 	private String email;
 	private String password;
 	private Date dataDiNascita;
-
+	private List<PostVO> posts;
 
 	public String getNome() {
 		return nome;
@@ -46,6 +47,12 @@ public class UserVO {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public List<PostVO> getPosts() {
+		return posts;
+	}
+	public void setPosts(List<PostVO> posts) {
+		this.posts = posts;
 	}
 
 

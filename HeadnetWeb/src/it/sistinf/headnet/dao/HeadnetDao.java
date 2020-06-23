@@ -2,12 +2,11 @@ package it.sistinf.headnet.dao;
 
 import java.sql.SQLException;
 
-
-import it.sistinf.headnet.avo.UserVO;
+import it.sistinf.headnet.vo.UserVO;
 
 public class HeadnetDao extends GestioneConnessione {
 
-	public UserVO cercaDipendenteVO(String username) {
+	public UserVO cercaUtenteVO(String username) throws Exception {
 		UserVO dip = new UserVO();
 
 		try {
@@ -33,35 +32,13 @@ public class HeadnetDao extends GestioneConnessione {
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
+			throw new Exception(e.getMessage());
 		} finally {
 			chiudiConnessione();
 		}
 		return dip;
 	}
 	
-	
-	
-
-	public void registraUser(UserVO user) throws SQLException {
-		try {
-
-			connection = this.apriConnessione();
-			preparedStatement = connection.prepareStatement("INSERT INTO USERS (nome, cognome, email, password, dataDiNascita)" + " VALUES (?, ?, ?, ?, ?)");
-			preparedStatement.setString(1, user.getNome());
-			preparedStatement.setString(2, user.getCognome());
-			preparedStatement.setString(3, user.getPassword());
-			preparedStatement.setString(4, user.getDataDiNascita());
-			preparedStatement.executeUpdate();
-
-		}
-		catch(SQLException e) {
-			throw e;
-		} finally {
-			chiudiConnessione();
-		}
-
-	}
 
 	public void registraUser(UserVO user) throws SQLException {
 		

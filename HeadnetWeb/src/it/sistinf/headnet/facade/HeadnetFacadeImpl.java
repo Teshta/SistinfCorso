@@ -3,19 +3,19 @@ package it.sistinf.headnet.facade;
 
 import java.sql.SQLException;
 
-import it.sistinf.headnet.avo.UserVO;
 import it.sistinf.headnet.dao.GestioneDriver;
 import it.sistinf.headnet.dao.HeadnetDao;
+import it.sistinf.headnet.vo.UserVO;
 
-public class HeadnetFacadeImp implements HeadnetFacade {
+public class HeadnetFacadeImpl implements HeadnetFacade {
 
 	@Override
-	public UserVO cercaUtente(String username) {
+	public UserVO cercaUsername(String username) throws Exception {
 		
 		new GestioneDriver().registraDriver();
 		UserVO trovato = null;
 		HeadnetDao dao = new HeadnetDao();
-		trovato = dao.cercaDipendenteVO(username);
+		trovato = dao.cercaUtenteVO(username);
 		
 		return trovato;
 	}
