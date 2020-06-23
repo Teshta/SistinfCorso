@@ -7,10 +7,10 @@ import it.sistinf.headnet.dao.GestioneDriver;
 import it.sistinf.headnet.dao.HeadnetDao;
 import it.sistinf.headnet.vo.UserVO;
 
-public class HeadnetFacadeImp implements HeadnetFacade {
+public class HeadnetFacadeImpl implements HeadnetFacade {
 
 	@Override
-	public UserVO cercaUtente(String username) throws Exception {
+	public UserVO cercaUsername(String username) throws Exception {
 		
 		new GestioneDriver().registraDriver();
 		UserVO trovato = null;

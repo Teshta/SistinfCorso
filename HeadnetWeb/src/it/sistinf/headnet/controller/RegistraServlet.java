@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.sistinf.headnet.facade.HeadnetFacade;
-import it.sistinf.headnet.facade.HeadnetFacadeImp;
+import it.sistinf.headnet.facade.HeadnetFacadeImpl;
 import it.sistinf.headnet.vo.UserVO;
 
 
@@ -69,7 +69,7 @@ public class RegistraServlet extends HttpServlet{
 		}
 		else {
 
-			HeadnetFacade facade = new HeadnetFacadeImp();
+			HeadnetFacade facade = new HeadnetFacadeImpl();
 			try {
 				facade.registraUser(user);
 				request.setAttribute("MSG_CORRECT", "L'inserimento è andato a buon fine");

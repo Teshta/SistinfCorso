@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import it.sistinf.headnet.facade.HeadnetFacade;
-import it.sistinf.headnet.facade.HeadnetFacadeImp;
+import it.sistinf.headnet.facade.HeadnetFacadeImpl;
 import it.sistinf.headnet.vo.UserVO;
 
 /**
@@ -41,10 +41,10 @@ public class LoginServlet extends HttpServlet {
 			else if(username== null || username.isEmpty()) {
 				request.setAttribute("MSG_KO", "Non hai ancora inserito uno username");
 			} else {
-				HeadnetFacade facade = new HeadnetFacadeImp();		
+				HeadnetFacade facade = new HeadnetFacadeImpl();		
 
 				try {
-					user = facade.cercaUtente(username);
+					user = facade.cercaUsername(username);
 					if(password.equals(user.getPassword())){
 						sessione.setAttribute("USER", user);
 						request.setAttribute("MSG_CORRECT", "Login effettuato con successo");
