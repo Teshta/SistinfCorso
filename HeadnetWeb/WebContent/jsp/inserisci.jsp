@@ -13,22 +13,16 @@
 		<jsp:include page="messaggi.jsp"></jsp:include>
 		<h1>Login</h1>
 		<form
-			action="${pageContext.servletContext.contextPath}/login"
-			method="post" id="miaForm">
+			action="${pageContext.servletContext.contextPath}/insert"
+			method="post" id="postForm">
 			<div class="form-group">
-				<label for="username">Username:</label> <input type="text"
-					class="form-control" placeholder="Inserisci username" id="username"
-					name="username" required>
-			</div>
-			<div class="form-group">
-				<label for="password">Password:</label> <input type="password"
-					class="form-control" placeholder="Inserisci password" id="password"
-					name="password" required>
+				<label for="contenuto">Contenuto:</label> <input type="text"
+					class="form-control" placeholder="Inserisci contenuto" id="contenuto"
+					name="contenuto" required>
 			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 			<!-- <button type="button" class="btn btn-primary" onclick="valida()">Entra</button> -->
 		</form>
-		<a class="nav-link" href="${pageContext.servletContext.contextPath}/jsp/registra.jsp">Se non sei registrato, clicca qui!</a>
 	</div>
 </body>
 </html>

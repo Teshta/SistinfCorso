@@ -6,7 +6,7 @@ import it.sistinf.headnet.avo.UserVO;
 
 public interface HeadnetFacade {
 
-	UserVO cercaUtente(String username);
+	UserVO cercaUtente(String username) throws Exception;
 
 	void registraUser(UserVO user) throws SQLException;
 

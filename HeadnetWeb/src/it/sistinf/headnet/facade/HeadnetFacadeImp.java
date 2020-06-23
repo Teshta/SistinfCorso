@@ -10,12 +10,12 @@ import it.sistinf.headnet.dao.HeadnetDao;
 public class HeadnetFacadeImp implements HeadnetFacade {
 
 	@Override
-	public UserVO cercaUtente(String username) {
+	public UserVO cercaUtente(String username) throws Exception {
 		
 		new GestioneDriver().registraDriver();
 		UserVO trovato = null;
 		HeadnetDao dao = new HeadnetDao();
-		trovato = dao.cercaDipendenteVO(username);
+		trovato = dao.cercaUtenteVO(username);
 		
 		return trovato;
 	}

@@ -7,7 +7,7 @@ import it.sistinf.headnet.avo.UserVO;
 
 public class HeadnetDao extends GestioneConnessione {
 
-	public UserVO cercaDipendenteVO(String username) {
+	public UserVO cercaUtenteVO(String username) throws Exception {
 		UserVO dip = new UserVO();
 
 		try {
@@ -33,7 +33,7 @@ public class HeadnetDao extends GestioneConnessione {
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
+			throw new Exception(e.getMessage());
 		} finally {
 			chiudiConnessione();
 		}
