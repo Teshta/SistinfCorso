@@ -2,6 +2,8 @@ package it.sistinf.headnet.facade;
 
 
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import it.sistinf.headnet.dao.GestioneDriver;
 import it.sistinf.headnet.dao.HeadnetDao;
@@ -35,12 +37,12 @@ public class HeadnetFacadeImpl implements HeadnetFacade {
 	}
 
 	@Override
-	public UserVO cercaUtente(String nome, String cognome) {
+	public List<UserVO> cercaUtenti(String nome, String cognome) {
 		new GestioneDriver().registraDriver();
-		UserVO trovato = new UserVO();
+		List<UserVO> utenti = new LinkedList<UserVO>();
 		HeadnetDao dao = new HeadnetDao();
-		trovato=dao.cercaUtente(nome, cognome);
-		return trovato;
+		utenti=dao.cercaUtenti(nome, cognome);
+		return utenti;
 	}
 
 	@Override
