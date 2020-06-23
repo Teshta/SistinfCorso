@@ -32,6 +32,7 @@ public class CercaServlet extends HttpServlet {
 		//String update = request.getParameter("up");
 		//String delete = request.getParameter("delete");
 		HeadnetFacade facade = new HeadnetFacadeImpl();
+		System.err.println("cognome");
 
 		UserVO trovato = new UserVO();
 		trovato = facade.cercaUtente(nome, cognome);
