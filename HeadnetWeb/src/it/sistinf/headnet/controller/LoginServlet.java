@@ -25,20 +25,19 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//manca controllo se l'utente è già loggato 
+ 
 		HttpSession sessione=request.getSession();
 		if(sessione.getAttribute("USER") != null)
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		else{
 			boolean successo = false;
 			UserVO user = new UserVO();
-			String email = request.getParameter("email");
+			String username = request.getParameter("username");
 			String password = request.getParameter("password"); //non criptata
 			HeadnetFacade facade = new HeadnetFacadeImp();		
 
 			try {
-				user = facade.cercaUtente(email);
+				user = facade.cercaUtente(username);
 				if(password.equals(user.getPassword())){
 					sessione.setAttribute("USER", user);
 					request.setAttribute("MSG_CORRECT", "Login effettuato con successo");

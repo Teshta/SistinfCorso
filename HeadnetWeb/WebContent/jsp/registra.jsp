@@ -13,8 +13,8 @@
 		<jsp:include page="messaggi.jsp"></jsp:include>
 		<h1>Registrati</h1>
 		<form
-			action="${pageContext.servletContext.contextPath}/#"
-			method="post" id="miaForm">
+			action="${pageContext.servletContext.contextPath}/registra"
+			method="post" id="regForm">
 			<div class="form-group">
 				<label for="nome">Nome:</label> <input type="text"
 					class="form-control" placeholder="Inserisci nome" id="nome"
@@ -24,6 +24,11 @@
 				<label for="cognome">Cognome:</label> <input type="text"
 					class="form-control" placeholder="Inserisci cognome" id="cognome"
 					name="cognome" value="${INSERENDO.cognome}">
+			</div>
+			<div class="form-group">
+				<label for="username">Username:</label> <input type="text"
+					class="form-control" placeholder="Inserisci username" id="username"
+					name="username" value="${INSERENDO.username}">
 			</div>
 			<div class="form-group">
 				<label for="email">Email:</label> <input type="email"

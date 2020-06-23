@@ -7,32 +7,28 @@ import it.sistinf.headnet.avo.UserVO;
 
 public class HeadnetDao extends GestioneConnessione {
 
-	public UserVO cercaDipendenteVO(String email) {
+	public UserVO cercaDipendenteVO(String username) {
 		UserVO dip = new UserVO();
 
 		try {
 
 			connection = this.apriConnessione();
 
-			String queryStr = "SELECT * FROM USERS U WHERE U.EMAIL = ?";
+			String queryStr = "SELECT * FROM USER U WHERE U.USERNAME = ?";
 			preparedStatement = connection.prepareStatement(queryStr);
-			preparedStatement.setString(1, email);
+			preparedStatement.setString(1, username);
 			resultSet = preparedStatement.executeQuery();
 
-			boolean trovato = false;
 
 			while(resultSet.next()) { //resultSet il cursore punta prima della prima riga, quindi necessario il next
 				dip.setNome(resultSet.getString("nome"));
 				dip.setCognome(resultSet.getString("cognome"));
+				dip.setUsername(resultSet.getString("username"));
 				dip.setEmail(resultSet.getString("email"));
 				dip.setPassword(resultSet.getString("password"));
 				dip.setDataDiNascita(resultSet.getDate("dataDiNascita"));
-				trovato = true;
-			}	
-
-//			if(!trovato) {
-//				throw new DipendenteNonTrovatoException();
-//			}
+				
+			}		
 
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -65,6 +61,29 @@ public class HeadnetDao extends GestioneConnessione {
 			chiudiConnessione();
 		}
 
+	}
+
+	public void registraUser(UserVO user) throws SQLException {
+		
+		try {
+
+			connection = this.apriConnessione();
+			preparedStatement = connection.prepareStatement("INSERT INTO HEADNET.USER (USERNAME, NOME, COGNOME, EMAIL, PASSWORD, DATADINASCITA) VALUES (?, ?, ?, ?, ?, ?)");
+			preparedStatement.setString(1, user.getUsername());
+			preparedStatement.setString(2, user.getNome());
+			preparedStatement.setString(3, user.getCognome());
+			preparedStatement.setString(4, user.getEmail());
+			preparedStatement.setString(5, user.getPassword());
+			preparedStatement.setDate(6, new java.sql.Date(user.getDataDiNascita().getTime()));
+			
+			preparedStatement.executeUpdate();
+
+		}
+		catch(SQLException e) {
+			throw e;
+		} finally {
+			chiudiConnessione();
+		}
 	}
 
 }
