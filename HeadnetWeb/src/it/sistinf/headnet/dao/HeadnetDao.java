@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import it.sistinf.headnet.vo.PostVO;
+import it.sistinf.headnet.vo.RichiestaVO;
 import it.sistinf.headnet.vo.UserVO;
 
 public class HeadnetDao extends GestioneConnessione {
@@ -152,5 +153,24 @@ public class HeadnetDao extends GestioneConnessione {
 		}
 		
 	} 
+	
+	public void mandaRichiesta(RichiestaVO richiesta) throws Exception {
+		try {
+			connection = this.apriConnessione();
+			preparedStatement = connection.prepareStatement("INSERT INTO richiesta_amicizia (stato, user_richiedente_id, user_ricevente_id) VALUES (?, ?, ?)");
+			preparedStatement.setString(1, String.valueOf(richiesta.getStato()));
+			preparedStatement.setInt(2, richiesta.getRichiedente().getId());
+			preparedStatement.setInt(3, richiesta.getRicevente().getId());
+			
+			preparedStatement.executeUpdate();
+
+		}
+		catch(SQLException e) {
+			throw e;
+		} finally {
+			chiudiConnessione();
+		}
+		
+	}
 
 }
