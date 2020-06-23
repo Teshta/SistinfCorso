@@ -14,7 +14,7 @@ public class HeadnetDao extends GestioneConnessione {
 
 			connection = this.apriConnessione();
 
-			String queryStr = "SELECT * FROM USERS U WHERE U.USERNAME = ?";
+			String queryStr = "SELECT * FROM USER U WHERE U.USERNAME = ?";
 			preparedStatement = connection.prepareStatement(queryStr);
 			preparedStatement.setString(1, username);
 			resultSet = preparedStatement.executeQuery();
@@ -45,7 +45,7 @@ public class HeadnetDao extends GestioneConnessione {
 		try {
 
 			connection = this.apriConnessione();
-			preparedStatement = connection.prepareStatement("INSERT INTO HEADNET.USERS (USERNAME, NOME, COGNOME, EMAIL, PASSWORD, DATADINASCITA) VALUES (?, ?, ?, ?, ?, ?)");
+			preparedStatement = connection.prepareStatement("INSERT INTO HEADNET.USER (USERNAME, NOME, COGNOME, EMAIL, PASSWORD, DATADINASCITA) VALUES (?, ?, ?, ?, ?, ?)");
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getNome());
 			preparedStatement.setString(3, user.getCognome());
