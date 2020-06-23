@@ -8,6 +8,7 @@ import java.util.List;
 import it.sistinf.headnet.dao.GestioneDriver;
 import it.sistinf.headnet.dao.HeadnetDao;
 import it.sistinf.headnet.vo.PostVO;
+import it.sistinf.headnet.vo.RichiestaVO;
 import it.sistinf.headnet.vo.UserVO;
 
 public class HeadnetFacadeImpl implements HeadnetFacade {
@@ -50,6 +51,15 @@ public class HeadnetFacadeImpl implements HeadnetFacade {
 		new GestioneDriver().registraDriver();
 		HeadnetDao dao = new HeadnetDao();
 		dao.inserisciPost(post);
+		
+	}
+	
+
+	@Override
+	public void mandaRichiesta(RichiestaVO richiesta) throws Exception {
+		new GestioneDriver().registraDriver();
+		HeadnetDao dao = new HeadnetDao();
+		dao.mandaRichiesta(richiesta);
 		
 	}
 }
