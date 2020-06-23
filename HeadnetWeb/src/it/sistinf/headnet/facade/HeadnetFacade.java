@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import it.sistinf.headnet.vo.PostVO;
+import it.sistinf.headnet.vo.RichiestaVO;
 import it.sistinf.headnet.vo.UserVO;
 
 public interface HeadnetFacade {
@@ -12,5 +13,6 @@ public interface HeadnetFacade {
 	void registraUser(UserVO user) throws SQLException;
 	List<UserVO> cercaUtenti(String nome, String cognome);
 	void inserisciPost(PostVO post) throws Exception;
+	void mandaRichiesta(RichiestaVO richiesta) throws Exception;
 
 }
