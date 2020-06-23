@@ -68,25 +68,31 @@ public class HeadnetDao extends GestioneConnessione {
 	}
 	
 	
-	public UserVO cercaUtente(String nome, String cognome) {
+	public List<UserVO> cercaUtenti(String nome, String cognome) {
 
-		UserVO user = new UserVO();
+		List<UserVO> users = new LinkedList<UserVO>();
 
 		try {
 			connection = this.apriConnessione();
-			String queryStr = "SELECT * FROM USER  WHERE user.nome = ? AND user.cognome = ?";
+			String queryStr = "SELECT * FROM USER WHERE user.nome LIKE ? AND user.cognome LIKE ?";
 			preparedStatement = connection.prepareStatement(queryStr);
-			preparedStatement.setString(1, nome);
-			preparedStatement.setString(2, cognome);
+			preparedStatement.setString(1, "%"+nome+"%");
+			preparedStatement.setString(2, "%"+cognome+"%");
 			resultSet = preparedStatement.executeQuery();
-
+			
 			while(resultSet.next()) {
+				UserVO user = new UserVO();
 				user.setNome(resultSet.getString("nome"));
 				user.setCognome(resultSet.getString("cognome"));
 				user.setEmail(resultSet.getString("email"));
 				user.setDataDiNascita(resultSet.getDate("dataDiNascita"));
 				user.setUsername(resultSet.getString("username"));
+				users.add(user);
 			}	
+			
+			if(users.size() == 0) {
+				users = null;
+			}
 		}
 
 		catch(SQLException e) {
@@ -94,9 +100,10 @@ public class HeadnetDao extends GestioneConnessione {
 		} finally {
 			chiudiConnessione();
 		}
-		return user;	
+		return users;	
 	
 	}	
+
 
 
 //	public List<UserVO> findAll() {
