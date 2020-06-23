@@ -1,6 +1,8 @@
 package it.sistinf.headnet.dao;
 
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import it.sistinf.headnet.vo.UserVO;
 
@@ -62,5 +64,63 @@ public class HeadnetDao extends GestioneConnessione {
 			chiudiConnessione();
 		}
 	}
+	
+	
+	public UserVO cercaUtente(String nome, String cognome) {
+
+		UserVO user = new UserVO();
+
+		try {
+			connection = this.apriConnessione();
+			String queryStr = "SELECT * FROM USER  WHERE user.nome = ? AND user.cognome = ?";
+			preparedStatement = connection.prepareStatement(queryStr);
+			preparedStatement.setString(1, nome);
+			preparedStatement.setString(2, cognome);
+			resultSet = preparedStatement.executeQuery();
+
+			while(resultSet.next()) {
+				user.setNome(resultSet.getString("nome"));
+				user.setCognome(resultSet.getString("cognome"));
+				user.setEmail(resultSet.getString("email"));
+				user.setDataDiNascita(resultSet.getDate("dataDiNascita"));
+				user.setUsername(resultSet.getString("username"));
+			}	
+		}
+
+		catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			chiudiConnessione();
+		}
+		return user;	
+	
+	}	
+
+
+	public List<UserVO> findAll() {
+		List<UserVO> listauser = new LinkedList<UserVO>(); 
+
+		try {
+			connection = this.apriConnessione();
+			statement = connection.createStatement();
+			String queryStr = "SELECT * FROM USER";
+			resultSet = statement.executeQuery(queryStr);
+
+			while(resultSet.next()) {
+				UserVO user = new UserVO();
+				user.setNome(resultSet.getString("nome"));
+				user.setEmail(resultSet.getString("email"));
+				user.setDataDiNascita(resultSet.getDate("dataDiNascita"));
+				user.setUsername(resultSet.getString("username"));
+				listauser.add(user);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			chiudiConnessione();
+		}
+		return listauser;
+	} 
 
 }
