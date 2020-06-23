@@ -32,4 +32,13 @@ public class HeadnetFacadeImpl implements HeadnetFacade {
 			throw e;
 		}
 	}
+	
+	
+	public UserVO cercaUtente(String nome, String cognome) {
+		new GestioneDriver().registraDriver();
+		UserVO trovato = new UserVO();
+		HeadnetDao dao = new HeadnetDao();
+		trovato=dao.cercaUtente(nome, cognome);
+		return trovato;
+	}
 }
