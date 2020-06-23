@@ -2,8 +2,7 @@ package it.sistinf.headnet.dao;
 
 import java.sql.SQLException;
 
-
-import it.sistinf.headnet.avo.UserVO;
+import it.sistinf.headnet.vo.UserVO;
 
 public class HeadnetDao extends GestioneConnessione {
 

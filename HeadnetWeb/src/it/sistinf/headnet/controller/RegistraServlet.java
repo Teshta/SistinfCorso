@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.sistinf.headnet.avo.UserVO;
 import it.sistinf.headnet.facade.HeadnetFacade;
 import it.sistinf.headnet.facade.HeadnetFacadeImp;
+import it.sistinf.headnet.vo.UserVO;
 
 
 

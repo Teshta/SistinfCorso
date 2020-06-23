@@ -3,9 +3,9 @@ package it.sistinf.headnet.facade;
 
 import java.sql.SQLException;
 
-import it.sistinf.headnet.avo.UserVO;
 import it.sistinf.headnet.dao.GestioneDriver;
 import it.sistinf.headnet.dao.HeadnetDao;
+import it.sistinf.headnet.vo.UserVO;
 
 public class HeadnetFacadeImp implements HeadnetFacade {
 

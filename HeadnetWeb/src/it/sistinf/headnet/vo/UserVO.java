@@ -1,4 +1,4 @@
-package it.sistinf.headnet.avo;
+package it.sistinf.headnet.vo;
 
 import java.util.Date;
 import java.util.List;
