@@ -2,6 +2,8 @@ package it.sistinf.headnet.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,15 +34,14 @@ public class CercaServlet extends HttpServlet {
 		//String update = request.getParameter("up");
 		//String delete = request.getParameter("delete");
 		HeadnetFacade facade = new HeadnetFacadeImpl();
-		System.err.println("cognome");
 
-		UserVO trovato = new UserVO();
-		trovato = facade.cercaUtente(nome, cognome);
+		List<UserVO> utenti = new LinkedList<UserVO>();
+		utenti = facade.cercaUtenti(nome, cognome);
 
-		request.setAttribute("TROVATO", trovato);
+		request.setAttribute("utenti", utenti);
 
 
-		String pagina = "/jsp/cerca.jsp";
+		String pagina = "/jsp/lista.jsp";
 
 		/*if(update!= null &&("t").equals(update.trim())) {
 			pagina="/jsp/modifica.jsp";
