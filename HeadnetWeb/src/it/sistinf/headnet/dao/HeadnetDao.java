@@ -8,7 +8,7 @@ import it.sistinf.headnet.vo.UserVO;
 
 public class HeadnetDao extends GestioneConnessione {
 
-	public UserVO cercaUtenteVO(String username) throws Exception {
+	public UserVO cercaUsername(String username) throws Exception {
 		UserVO dip = new UserVO();
 
 		try {

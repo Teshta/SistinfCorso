@@ -15,7 +15,7 @@ public class HeadnetFacadeImpl implements HeadnetFacade {
 		new GestioneDriver().registraDriver();
 		UserVO trovato = null;
 		HeadnetDao dao = new HeadnetDao();
-		trovato = dao.cercaUtenteVO(username);
+		trovato = dao.cercaUsername(username);
 		
 		return trovato;
 	}
