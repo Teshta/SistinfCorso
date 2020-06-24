@@ -97,6 +97,15 @@ public class HeadnetFacadeImpl implements HeadnetFacade {
         amici=dao.cercaAmici(richiesta);
         return amici;
     }
+    
+    @Override
+    public List<PostVO> mieiPost(UserVO user) {
+        new GestioneDriver().registraDriver();
+        List<PostVO> posts = new LinkedList<PostVO>();
+        HeadnetDao dao = new HeadnetDao();
+        posts=dao.mieiPost(user);
+        return posts;
+    }
 
 
 }

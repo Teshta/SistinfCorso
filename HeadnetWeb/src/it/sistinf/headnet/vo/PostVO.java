@@ -3,7 +3,7 @@ package it.sistinf.headnet.vo;
 import java.util.Date;
 
 public class PostVO {
-
+	private int id;
 	private String contenuto;
 	private Date dataPubblicazione;
 	private UserVO user;
@@ -25,6 +25,12 @@ public class PostVO {
 	}
 	public void setUser(UserVO user) {
 		this.user = user;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

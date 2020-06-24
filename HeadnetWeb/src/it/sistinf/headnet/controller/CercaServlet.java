@@ -23,13 +23,9 @@ public class CercaServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.err.println("CHIAMATO METODO DOGET");
-		//response.getWriter().append("Servito alla url: ").append(request.getContextPath()).append(" parametro" + request.getParameter("matricola"));
-		//request.getRequestDispatcher("/jsp/cerca.jsp").forward(request, response);
 
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
-		//String update = request.getParameter("up");
-		//String delete = request.getParameter("delete");
 		HeadnetFacade facade = new HeadnetFacadeImpl();
 
 		List<UserVO> utenti = new LinkedList<UserVO>();
@@ -40,22 +36,6 @@ public class CercaServlet extends HttpServlet {
 
 		String pagina = "/jsp/lista.jsp";
 
-		/*if(update!= null &&("t").equals(update.trim())) {
-			pagina="/jsp/modifica.jsp";
-		}
-		else if(delete!= null && ("t").equals(delete.trim())) {
-			try {
-				facade.deleteDipendente(matricola);
-				request.setAttribute("CORRETTO", "Il dipendente è stato eliminato.");
-		} catch (SQLException e) {
-				request.setAttribute("SBAGLIATO", "L'operazione è stata annullata.");
-			e.printStackTrace();
-			}
-			pagina = "/dipendenti";
-		}
-		System.err.println(update);
-		System.err.println(delete);
-		*/
 		request.getRequestDispatcher(pagina).forward(request, response);
 
 	}

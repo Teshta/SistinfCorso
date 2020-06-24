@@ -18,5 +18,6 @@ public interface HeadnetFacade {
 	List<RichiestaVO> cercaRichiesteRicevute(RichiestaVO richiesta);
     List<RichiestaVO> cercaRichiesteInviate(RichiestaVO richiesta);
 	List<UserVO> cercaAmici(RichiestaVO richiesta);
+	List<PostVO> mieiPost(UserVO user);
 
 }
