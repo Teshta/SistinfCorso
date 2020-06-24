@@ -13,6 +13,7 @@ public class UserVO {
 	private String password;
 	private Date dataDiNascita;
 	private List<PostVO> posts;
+	private List<RichiestaVO> richieste;
 
 	public String getNome() {
 		return nome;
@@ -61,6 +62,12 @@ public class UserVO {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public List<RichiestaVO> getRichieste() {
+		return richieste;
+	}
+	public void setRichieste(List<RichiestaVO> richieste) {
+		this.richieste = richieste;
 	}
 
 

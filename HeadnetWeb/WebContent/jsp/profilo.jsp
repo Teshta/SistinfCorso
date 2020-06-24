@@ -41,6 +41,6 @@
     </form>
   </div>
 </nav>
-
+<jsp:include page="messaggi.jsp"></jsp:include>
 <div class="container">
 </div>

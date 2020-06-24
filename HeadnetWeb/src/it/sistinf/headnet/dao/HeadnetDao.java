@@ -83,6 +83,7 @@ public class HeadnetDao extends GestioneConnessione {
 			
 			while(resultSet.next()) {
 				UserVO user = new UserVO();
+				user.setId(resultSet.getInt("user_id"));
 				user.setNome(resultSet.getString("nome"));
 				user.setCognome(resultSet.getString("cognome"));
 				user.setEmail(resultSet.getString("email"));
@@ -157,10 +158,10 @@ public class HeadnetDao extends GestioneConnessione {
 	public void mandaRichiesta(RichiestaVO richiesta) throws Exception {
 		try {
 			connection = this.apriConnessione();
-			preparedStatement = connection.prepareStatement("INSERT INTO richiesta_amicizia (stato, user_richiedente_id, user_ricevente_id) VALUES (?, ?, ?)");
-			preparedStatement.setString(1, String.valueOf(richiesta.getStato()));
-			preparedStatement.setInt(2, richiesta.getRichiedente().getId());
-			preparedStatement.setInt(3, richiesta.getRicevente().getId());
+			preparedStatement = connection.prepareStatement("INSERT INTO richiesta_amicizia ( user_richiedente, user_ricevente, stato) VALUES (?, ?, ?)");
+			preparedStatement.setInt(1, richiesta.getRichiedente().getId());
+			preparedStatement.setInt(2, richiesta.getRicevente().getId());
+			preparedStatement.setString(3, richiesta.getStato());
 			
 			preparedStatement.executeUpdate();
 
