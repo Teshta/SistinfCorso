@@ -14,5 +14,5 @@ public interface HeadnetFacade {
 	List<UserVO> cercaUtenti(String nome, String cognome);
 	void inserisciPost(PostVO post) throws Exception;
 	void mandaRichiesta(RichiestaVO richiesta) throws Exception;
-
+	void gestisciAmicizia(String stato, int richiesta) throws Exception;
 }

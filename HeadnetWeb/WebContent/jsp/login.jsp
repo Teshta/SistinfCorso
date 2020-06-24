@@ -28,7 +28,6 @@
 			<button type="submit" class="btn btn-primary">Submit</button>
 			<!-- <button type="button" class="btn btn-primary" onclick="valida()">Entra</button> -->
 		</form>
-		<a class="nav-link" href="${pageContext.servletContext.contextPath}/jsp/registra.jsp">Se non sei registrato, clicca qui!</a>
 	</div>
 </body>
 </html>

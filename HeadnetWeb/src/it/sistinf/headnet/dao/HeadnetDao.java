@@ -173,5 +173,24 @@ public class HeadnetDao extends GestioneConnessione {
 		}
 		
 	}
+	
+	public void gestisciAmicizia(String stato, int richiesta) throws Exception {
+		try {
 
+			connection = this.apriConnessione();
+			preparedStatement = connection.prepareStatement("UPDATE RICHIESTA_AMICIZIA SET STATO = ? WHERE ID = ? ");
+			preparedStatement.setString(1, stato);
+			preparedStatement.setInt(2, richiesta);
+			
+			preparedStatement.executeUpdate();
+
+		}
+		catch(SQLException e) {
+			throw e;
+		} finally {
+			chiudiConnessione();
+		}
+		
+	}
+	
 }

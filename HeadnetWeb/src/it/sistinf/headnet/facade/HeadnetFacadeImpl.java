@@ -62,4 +62,11 @@ public class HeadnetFacadeImpl implements HeadnetFacade {
 		dao.mandaRichiesta(richiesta);
 		
 	}
+
+	@Override
+	public void gestisciAmicizia(String stato, int richiesta) throws Exception {
+		new GestioneDriver().registraDriver();
+		HeadnetDao dao = new HeadnetDao();
+		dao.gestisciAmicizia(stato,richiesta);		
+	}
 }
