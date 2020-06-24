@@ -264,5 +264,45 @@ public class HeadnetDao extends GestioneConnessione {
 
     }
 
+    
+    public List<UserVO> cercaAmici(RichiestaVO richiesta) {
+
+        List<UserVO> amici = new LinkedList<UserVO>();
+
+        try {
+            connection = this.apriConnessione();
+            StringBuilder queryStr = new StringBuilder();
+            queryStr.append("SELECT u.user_id, u.username, u.nome, u.cognome "); 
+            queryStr.append("FROM user AS u JOIN richiesta_amicizia AS r ON u.user_id=r.user_richiedente ");
+            queryStr.append("WHERE r.stato = 'a' AND r.user_ricevente = ? ");
+            queryStr.append("UNION SELECT u.user_id, u.username, u.nome, u.cognome ");
+            queryStr.append("FROM user AS u JOIN richiesta_amicizia as r ON u.user_id=r.user_ricevente  ");
+            queryStr.append("WHERE r.stato = 'a' AND r.user_richiedente = ?");
+            preparedStatement = connection.prepareStatement(queryStr.toString());
+            preparedStatement.setInt(1, richiesta.getRichiedente().getId());
+            preparedStatement.setInt(2, richiesta.getRicevente().getId());
+            resultSet = preparedStatement.executeQuery();
+            
+            while(resultSet.next()) {
+                UserVO amico = new UserVO();
+                amico.setId(resultSet.getInt("user_id"));     
+                amico.setUsername(resultSet.getString("username"));
+                amico.setNome(resultSet.getString("nome"));
+                amico.setCognome(resultSet.getString("cognome"));
+                System.err.println("ID AMICO: "+ amico.getId()); 
+                amici.add(amico);
+            }    
+            
+    }
+
+        catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            chiudiConnessione();
+        }
+        return amici;    
+
+    }
+
 	
 }

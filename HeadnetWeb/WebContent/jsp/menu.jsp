@@ -19,7 +19,8 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active"><c:if test="${!empty USER.username}"><a href="${pageContext.servletContext.contextPath}/jsp/profilo.jsp">Profilo utente</a></c:if></li>
-			<li><c:if test="${!empty USER.username}"><a href="#">Amici</a></c:if></li>
+			<li><c:if test="${!empty USER.username}"><a href="${pageContext.servletContext.contextPath}/jsp/inserisciPost.jsp">Inserisci Post</a></c:if></li>
+			<li><c:if test="${!empty USER.username}"><a href="${pageContext.servletContext.contextPath}/friends">Amici</a></c:if></li>
 			<li class="dropdown"><c:if test="${!empty USER.username}"><a class="dropdown-toggle" data-toggle="dropdown" href="${pageContext.servletContext.contextPath}/jsp/richiesteAmicizia.jsp">Richieste di amicizia</a>
 					<ul class="dropdown-menu">
 						<li><a href="${pageContext.servletContext.contextPath}/out">Inviate</a></li>
