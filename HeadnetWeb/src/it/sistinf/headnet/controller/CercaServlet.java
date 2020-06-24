@@ -1,7 +1,6 @@
 package it.sistinf.headnet.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.sistinf.headnet.vo.UserVO;
-import it.sistinf.headnet.facade.HeadnetFacade;
-import it.sistinf.headnet.facade.HeadnetFacadeImpl;
 import it.sistinf.headnet.facade.HeadnetFacade;
 import it.sistinf.headnet.facade.HeadnetFacadeImpl;
 
