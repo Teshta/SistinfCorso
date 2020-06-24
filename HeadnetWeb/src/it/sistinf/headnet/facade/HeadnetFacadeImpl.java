@@ -106,6 +106,16 @@ public class HeadnetFacadeImpl implements HeadnetFacade {
         posts=dao.mieiPost(user);
         return posts;
     }
+    
+    @Override
+    public List<PostVO> postHome(UserVO user){
+        new GestioneDriver().registraDriver();
+        List<PostVO> posts = new LinkedList<PostVO>();
+        HeadnetDao dao = new HeadnetDao();
+        posts=dao.postHome(user);
+        return posts;
+        
+    }
 
 
 }

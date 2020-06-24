@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 				}
 
 				if (successo)
-					request.getRequestDispatcher("index.jsp").forward(request, response);
+					request.getRequestDispatcher("/homepost").forward(request, response);
 				else 
 					request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
 			}

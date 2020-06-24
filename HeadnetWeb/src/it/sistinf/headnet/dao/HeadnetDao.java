@@ -4,8 +4,6 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.crypto.spec.PSource;
-
 import it.sistinf.headnet.vo.PostVO;
 import it.sistinf.headnet.vo.RichiestaVO;
 import it.sistinf.headnet.vo.UserVO;
@@ -340,4 +338,54 @@ public class HeadnetDao extends GestioneConnessione {
 
     }
 	
+    
+    public List<PostVO> postHome(UserVO user) {
+
+        List<PostVO> post = new LinkedList<PostVO>();
+
+        try {
+            connection = this.apriConnessione();
+            StringBuilder queryStr = new StringBuilder();
+            queryStr.append("SELECT p.post_id , p.contenuto, p.dataPubblicazione, u.username ");
+            queryStr.append("FROM post p JOIN user u ");
+            queryStr.append("ON u.user_id = p.user_id ");
+            queryStr.append("WHERE  p.user_id = ? ");
+            queryStr.append("UNION SELECT p.post_id , p.contenuto, p.dataPubblicazione, innerTable.userName ");
+            queryStr.append("FROM post AS p ");
+            queryStr.append("JOIN ( SELECT u.user_id as userId, u.username as userName ");
+            queryStr.append("FROM user AS u JOIN richiesta_amicizia AS r ON u.user_id=r.user_richiedente ");
+            queryStr.append("WHERE r.stato = 'a' AND r.user_ricevente = ? ");
+            queryStr.append("UNION SELECT u.user_id as userId, u.username as userName ");
+            queryStr.append("FROM user AS u JOIN richiesta_amicizia as r ON u.user_id=r.user_ricevente ");
+            queryStr.append("WHERE r.stato = 'a' AND r.user_richiedente = ?) as innerTable ");
+            queryStr.append("ON p.user_id = innerTable.userId ");
+            preparedStatement = connection.prepareStatement(queryStr.toString());
+            preparedStatement.setInt(1, user.getId());
+            preparedStatement.setInt(2, user.getId());
+            preparedStatement.setInt(3, user.getId());
+            resultSet = preparedStatement.executeQuery();
+            
+            while(resultSet.next()) {
+                PostVO postSing = new PostVO();
+                UserVO userp = new UserVO();
+                postSing.setId(resultSet.getInt("post_id"));     
+                postSing.setContenuto(resultSet.getString("contenuto"));
+                postSing.setDataPubblicazione(resultSet.getDate("dataPubblicazione"));
+                postSing.setUser(userp);
+                postSing.getUser().setUsername(resultSet.getString("username"));
+                System.err.println("USER: "+ postSing.getUser().getUsername());
+                post.add(postSing);
+            }
+            
+    }
+
+        catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            chiudiConnessione();
+        }
+        return post;    
+
+    }
+
 }

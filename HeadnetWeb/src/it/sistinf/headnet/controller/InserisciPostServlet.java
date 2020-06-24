@@ -68,7 +68,7 @@ public class InserisciPostServlet extends HttpServlet {
 
 			}
 			if (inserito)
-				request.getRequestDispatcher("/index.jsp").forward(request, response);
+				request.getRequestDispatcher("/homepost").forward(request, response);
 			else
 				request.getRequestDispatcher("/jsp/inserisciPost.jsp").forward(request, response);	
 		}

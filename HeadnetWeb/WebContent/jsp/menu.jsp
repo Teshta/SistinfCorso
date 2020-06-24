@@ -3,7 +3,7 @@
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand"
-				href="${pageContext.servletContext.contextPath}/index.jsp">Home</a>
+				href="${pageContext.servletContext.contextPath}/homepost">Home</a>
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active"><c:if test="${!empty USER.username}"><a href="${pageContext.servletContext.contextPath}/mine">Profilo utente</a></c:if></li>
