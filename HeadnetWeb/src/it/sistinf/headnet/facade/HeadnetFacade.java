@@ -15,4 +15,7 @@ public interface HeadnetFacade {
 	void inserisciPost(PostVO post) throws Exception;
 	void mandaRichiesta(RichiestaVO richiesta) throws Exception;
 	void gestisciAmicizia(String stato, int richiesta) throws Exception;
+	List<RichiestaVO> cercaRichiesteRicevute(RichiestaVO richiesta);
+    List<RichiestaVO> cercaRichiesteInviate(RichiestaVO richiesta);
+
 }

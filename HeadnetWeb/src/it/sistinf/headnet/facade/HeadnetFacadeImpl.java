@@ -69,4 +69,24 @@ public class HeadnetFacadeImpl implements HeadnetFacade {
 		HeadnetDao dao = new HeadnetDao();
 		dao.gestisciAmicizia(stato,richiesta);		
 	}
+	
+	@Override
+    public List<RichiestaVO> cercaRichiesteRicevute(RichiestaVO richiesta) {
+        new GestioneDriver().registraDriver();
+        List<RichiestaVO> richiesteRicevute = new LinkedList<RichiestaVO>();
+        HeadnetDao dao = new HeadnetDao();
+        richiesteRicevute=dao.cercaRichiesteRicevute(richiesta);
+        return richiesteRicevute;
+    }
+
+    
+    @Override
+    public List<RichiestaVO> cercaRichiesteInviate(RichiestaVO richiesta) {
+        new GestioneDriver().registraDriver();
+        List<RichiestaVO> richiesteInviate = new LinkedList<RichiestaVO>();
+        HeadnetDao dao = new HeadnetDao();
+        richiesteInviate=dao.cercaRichiesteInviate(richiesta);
+        return richiesteInviate;
+    }
+
 }

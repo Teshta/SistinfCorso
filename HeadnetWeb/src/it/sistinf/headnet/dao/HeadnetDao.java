@@ -173,12 +173,12 @@ public class HeadnetDao extends GestioneConnessione {
 		}
 		
 	}
-	
+	/* gestisce le amicizie aggiornando lo stato ad accettata o rifiutata */
 	public void gestisciAmicizia(String stato, int richiesta) throws Exception {
 		try {
 
 			connection = this.apriConnessione();
-			preparedStatement = connection.prepareStatement("UPDATE RICHIESTA_AMICIZIA SET STATO = ? WHERE ID = ? ");
+			preparedStatement = connection.prepareStatement("UPDATE RICHIESTA_AMICIZIA SET STATO = ? WHERE RICHIESTA_ID = ? ");
 			preparedStatement.setString(1, stato);
 			preparedStatement.setInt(2, richiesta);
 			
@@ -192,5 +192,77 @@ public class HeadnetDao extends GestioneConnessione {
 		}
 		
 	}
+	
+	public List<RichiestaVO> cercaRichiesteRicevute(RichiestaVO richiesta) {
+
+        List<RichiestaVO> richiesteRicevute = new LinkedList<RichiestaVO>();
+
+        try {
+            connection = this.apriConnessione();
+            String queryStr = "SELECT u.user_id , u.username, u.nome, u.cognome, r.richiesta_id FROM user as u JOIN richiesta_amicizia as r ON r.user_richiedente = u.user_id WHERE r.stato = 's' AND r.user_ricevente = ?";
+            preparedStatement = connection.prepareStatement(queryStr);
+            preparedStatement.setInt(1, richiesta.getRicevente().getId() );
+            resultSet = preparedStatement.executeQuery();
+            
+            while(resultSet.next()) {
+                RichiestaVO richRic = new RichiestaVO();
+                UserVO richiedente = new UserVO();
+                richiedente.setId(resultSet.getInt("user_id"));     
+                richiedente.setUsername(resultSet.getString("username"));
+                richiedente.setNome(resultSet.getString("nome"));
+                richiedente.setCognome(resultSet.getString("cognome"));
+                System.err.println("ID RICHIEDENTE: "+richiedente.getId()); 
+                richRic.setRichiedente(richiedente); 
+                richRic.setId(resultSet.getInt("richiesta_id"));
+                richiesteRicevute.add(richRic);
+            }    
+            
+    }
+
+        catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            chiudiConnessione();
+        }
+        return richiesteRicevute;    
+
+    }
+    
+    
+    public List<RichiestaVO> cercaRichiesteInviate(RichiestaVO richiesta) {
+
+        List<RichiestaVO> richiesteInviate = new LinkedList<RichiestaVO>();
+
+        try {
+            connection = this.apriConnessione();
+            String queryStr = "SELECT u.user_id , u.username, u.nome, u.cognome, r.richiesta_id FROM user as u JOIN richiesta_amicizia as r ON r.user_ricevente = u.user_id WHERE r.stato = 's' AND r.user_richiedente = ?";
+            preparedStatement = connection.prepareStatement(queryStr);
+            preparedStatement.setInt(1, richiesta.getRichiedente().getId() );
+            resultSet = preparedStatement.executeQuery();
+            
+            while(resultSet.next()) {
+                RichiestaVO richInv = new RichiestaVO();
+                UserVO ricevente = new UserVO();
+                ricevente.setId(resultSet.getInt("user_id"));     
+                ricevente.setUsername(resultSet.getString("username"));
+                ricevente.setNome(resultSet.getString("nome"));
+                ricevente.setCognome(resultSet.getString("cognome"));
+                System.err.println("ID RICEVENTE: "+ricevente.getId()); 
+                richInv.setRicevente(ricevente);
+                richInv.setId(resultSet.getInt("richiesta_id"));
+                richiesteInviate.add(richInv);
+            }    
+            
+    }
+
+        catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            chiudiConnessione();
+        }
+        return richiesteInviate;    
+
+    }
+
 	
 }
