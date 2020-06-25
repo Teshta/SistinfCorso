@@ -23,6 +23,7 @@
 		<h1>${post.user.username}</h1>
 		<p>${post.contenuto }</p>
 		<p>Pubblicato il: ${post.dataPubblicazione}</p>
+		<p>${post.like}</p>
 		<a href="${pageContext.servletContext.contextPath}/like?idPost=${post.id}&proprietario=${post.user.id}" ><i class="fa fa-glass" aria-hidden="true"></i></a>
 	</div>
 </c:forEach>

@@ -392,7 +392,7 @@ public class HeadnetDao extends GestioneConnessione {
     public void mettiLike (UserVO user, PostVO post) throws Exception {
         try {
             connection = this.apriConnessione();
-            preparedStatement = connection.prepareStatement("INSERT INTO headnet.like (user_id, post_id, post_user_id) VALUES (?, ?, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO post_like (user_id, post_id, post_user_id) VALUES (?, ?, ?)");
             preparedStatement.setInt(1, user.getId());
             preparedStatement.setInt(2, post.getId());
             preparedStatement.setInt(3, post.getUser().getId());
@@ -414,12 +414,12 @@ public class HeadnetDao extends GestioneConnessione {
         int c = 0;
         try {
             connection = this.apriConnessione();
-            preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM post_like WHERE post_id = ? ");    
+            preparedStatement = connection.prepareStatement("SELECT COUNT(*) contatore FROM post_like WHERE post_id = ? ");    
             preparedStatement.setInt(1, post.getId());        
             resultSet = preparedStatement.executeQuery();
             
             while(resultSet.next()) {
-             c = resultSet.getInt("count");
+             c = resultSet.getInt("contatore");
             }
 
         }
