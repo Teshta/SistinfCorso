@@ -20,5 +20,7 @@ public interface HeadnetFacade {
 	List<UserVO> cercaAmici(RichiestaVO richiesta);
 	List<PostVO> mieiPost(UserVO user);
 	List<PostVO> postHome(UserVO user);
+	void mettiLike(UserVO user, PostVO post) throws Exception;
+	int contaLike(PostVO post) throws Exception;
 
 }

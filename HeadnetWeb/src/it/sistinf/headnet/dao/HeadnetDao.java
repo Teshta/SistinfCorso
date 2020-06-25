@@ -346,11 +346,11 @@ public class HeadnetDao extends GestioneConnessione {
         try {
             connection = this.apriConnessione();
             StringBuilder queryStr = new StringBuilder();
-            queryStr.append("SELECT p.post_id , p.contenuto, p.dataPubblicazione, u.username ");
+            queryStr.append("SELECT p.post_id , p.contenuto, p.dataPubblicazione, p.user_id, u.username ");
             queryStr.append("FROM post p JOIN user u ");
             queryStr.append("ON u.user_id = p.user_id ");
             queryStr.append("WHERE  p.user_id = ? ");
-            queryStr.append("UNION SELECT p.post_id , p.contenuto, p.dataPubblicazione, innerTable.userName ");
+            queryStr.append("UNION SELECT p.post_id , p.contenuto, p.dataPubblicazione, p.user_id, innerTable.userName ");
             queryStr.append("FROM post AS p ");
             queryStr.append("JOIN ( SELECT u.user_id as userId, u.username as userName ");
             queryStr.append("FROM user AS u JOIN richiesta_amicizia AS r ON u.user_id=r.user_richiedente ");
@@ -372,6 +372,7 @@ public class HeadnetDao extends GestioneConnessione {
                 postSing.setContenuto(resultSet.getString("contenuto"));
                 postSing.setDataPubblicazione(resultSet.getDate("dataPubblicazione"));
                 postSing.setUser(userp);
+                postSing.getUser().setId(resultSet.getInt("user_id"));
                 postSing.getUser().setUsername(resultSet.getString("username"));
                 System.err.println("USER: "+ postSing.getUser().getUsername());
                 post.add(postSing);
@@ -387,5 +388,50 @@ public class HeadnetDao extends GestioneConnessione {
         return post;    
 
     }
+    
+    public void mettiLike (UserVO user, PostVO post) throws Exception {
+        try {
+            connection = this.apriConnessione();
+            preparedStatement = connection.prepareStatement("INSERT INTO headnet.like (user_id, post_id, post_user_id) VALUES (?, ?, ?)");
+            preparedStatement.setInt(1, user.getId());
+            preparedStatement.setInt(2, post.getId());
+            preparedStatement.setInt(3, post.getUser().getId());
+            
+            preparedStatement.executeUpdate();
+
+        }
+        catch(SQLException e) {
+            throw e;
+        } finally {
+            chiudiConnessione();
+        }
+        
+    }
+    
+    
+   public int contaLike (PostVO post) throws Exception {
+        
+        int c = 0;
+        try {
+            connection = this.apriConnessione();
+            preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM post_like WHERE post_id = ? ");    
+            preparedStatement.setInt(1, post.getId());        
+            resultSet = preparedStatement.executeQuery();
+            
+            while(resultSet.next()) {
+             c = resultSet.getInt("count");
+            }
+
+        }
+        catch(SQLException e) {
+            throw e;
+        } finally {
+            chiudiConnessione();
+        }
+        
+    return c;
+        
+    }
+
 
 }

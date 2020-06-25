@@ -116,6 +116,23 @@ public class HeadnetFacadeImpl implements HeadnetFacade {
         return posts;
         
     }
+    
+    @Override
+    public int contaLike(PostVO post) throws Exception {
+        new GestioneDriver().registraDriver();
+        HeadnetDao dao = new HeadnetDao();
+        int c = dao.contaLike(post);
+        return c;
+    }
+
+    @Override
+    public void mettiLike(UserVO user, PostVO post) throws Exception {
+        new GestioneDriver().registraDriver();
+        HeadnetDao dao = new HeadnetDao();
+        dao.mettiLike(user, post);
+        
+    }
+
 
 
 }
