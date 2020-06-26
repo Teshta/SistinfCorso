@@ -22,5 +22,8 @@ public interface HeadnetFacade {
 	List<PostVO> postHome(UserVO user);
 	void mettiLike(UserVO user, PostVO post) throws Exception;
 	int contaLike(PostVO post) throws Exception;
+	boolean controllaAmicizie(RichiestaVO richiesta);
+	boolean controllaRichiesteInviate(RichiestaVO richiesta);
+	boolean controllaRichiesteRicevute(RichiestaVO richiesta);
 
 }

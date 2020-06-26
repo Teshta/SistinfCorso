@@ -7,7 +7,7 @@
 <meta charset="ISO-8859-1">
 <jsp:include page="head.jsp"></jsp:include>
 </head>
-<body>
+<body style="background-color:#F4F1DE;">
 	<jsp:include page="menu.jsp"></jsp:include>
 	<div class="container container-fluid">
 		<jsp:include page="messaggi.jsp"></jsp:include>
@@ -20,7 +20,7 @@
 					class="form-control" placeholder="Inserisci contenuto" id="contenuto"
 					name="contenuto" required>
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary">Condividi</button>
 			<!-- <button type="button" class="btn btn-primary" onclick="valida()">Entra</button> -->
 		</form>
 	</div>

@@ -7,7 +7,7 @@
 <meta charset="ISO-8859-1">
 <jsp:include page="head.jsp"></jsp:include>
 </head>
-<body>
+<body style="background-color: #F4F1DE;">
 	<jsp:include page="menu.jsp"></jsp:include>
 	<div class="container container-fluid">
 		<jsp:include page="messaggi.jsp"></jsp:include>

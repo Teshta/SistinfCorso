@@ -26,6 +26,7 @@ public class CercaServlet extends HttpServlet {
 
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
+		//mancano i controlli
 		HeadnetFacade facade = new HeadnetFacadeImpl();
 
 		List<UserVO> utenti = new LinkedList<UserVO>();

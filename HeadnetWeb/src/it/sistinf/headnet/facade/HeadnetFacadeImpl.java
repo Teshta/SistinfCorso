@@ -133,6 +133,30 @@ public class HeadnetFacadeImpl implements HeadnetFacade {
         
     }
 
+	@Override
+	public boolean controllaAmicizie(RichiestaVO richiesta) {
+		new GestioneDriver().registraDriver();
+        HeadnetDao dao = new HeadnetDao();
+        boolean trovato = dao.controllaAmicizie(richiesta);
+		return trovato;
+	}
+
+	@Override
+	public boolean controllaRichiesteInviate(RichiestaVO richiesta) {
+		new GestioneDriver().registraDriver();
+        HeadnetDao dao = new HeadnetDao();
+        boolean trovato = dao.controllaRichiesteInviate(richiesta);
+		return trovato;
+	}
+
+	@Override
+	public boolean controllaRichiesteRicevute(RichiestaVO richiesta) {
+		new GestioneDriver().registraDriver();
+        HeadnetDao dao = new HeadnetDao();
+        boolean trovato = dao.controllaRichiesteRicevute(richiesta);
+		return trovato;
+	}
+
 
 
 }

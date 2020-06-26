@@ -43,9 +43,9 @@ public class InserisciPostServlet extends HttpServlet {
 			UserVO user = new UserVO();
 			
 			post.setContenuto(contenuto);
-			Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
-			Date today = calendar.getTime();
-			post.setDataPubblicazione(today);
+//			Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Rome"),Locale.ITALY);
+//			Date today = calendar.getTime();
+//			post.setDataPubblicazione(today);
 			user = (UserVO)sessione.getAttribute("USER"); 
 			post.setUser(user);
 

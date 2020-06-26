@@ -2,14 +2,31 @@
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand"
-				href="${pageContext.servletContext.contextPath}/homepost">Home</a>
+			<img
+				src="https://i0.wp.com/www.generazionepost.it/wp-content/uploads/2019/09/Stewie_Griffin.png?fit=781%2C987&ssl=1"
+				alt="Logo" style="width: 40px;">  
+				<c:if test="${empty USER.username}"><a class="navbar-brand"
+				href="${pageContext.servletContext.contextPath}/index.jsp">Home</a></c:if>
+				<c:if test="${!empty USER.username}"><a class="navbar-brand"
+				href="${pageContext.servletContext.contextPath}/homepost">Home</a></c:if>
 		</div>
 		<ul class="nav navbar-nav">
-			<li class="active"><c:if test="${!empty USER.username}"><a href="${pageContext.servletContext.contextPath}/mine">Profilo ${USER.username} </a></c:if></li>
-			<li><c:if test="${!empty USER.username}"><a href="${pageContext.servletContext.contextPath}/jsp/inserisciPost.jsp">Inserisci Post</a></c:if></li>
-			<li><c:if test="${!empty USER.username}"><a href="${pageContext.servletContext.contextPath}/friends">Amici</a></c:if></li>
-			<li class="dropdown"><c:if test="${!empty USER.username}"><a class="dropdown-toggle" data-toggle="dropdown" href="${pageContext.servletContext.contextPath}/jsp/richiesteAmicizia.jsp">Richieste di amicizia</a>
+			<li class="active"><c:if test="${!empty USER.username}">
+					<a href="${pageContext.servletContext.contextPath}/mine">Profilo
+						${USER.username} </a>
+				</c:if></li>
+			<li><c:if test="${!empty USER.username}">
+					<a
+						href="${pageContext.servletContext.contextPath}/jsp/inserisciPost.jsp">Inserisci
+						Post</a>
+				</c:if></li>
+			<li><c:if test="${!empty USER.username}">
+					<a href="${pageContext.servletContext.contextPath}/friends">Amici</a>
+				</c:if></li>
+			<li class="dropdown"><c:if test="${!empty USER.username}">
+					<a class="dropdown-toggle" data-toggle="dropdown"
+						href="${pageContext.servletContext.contextPath}/jsp/richiesteAmicizia.jsp">Richieste
+						di amicizia</a>
 					<ul class="dropdown-menu">
 						<li><a href="${pageContext.servletContext.contextPath}/out">Inviate</a></li>
 						<li><a href="${pageContext.servletContext.contextPath}/in">Ricevute</a></li>

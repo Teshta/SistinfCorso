@@ -1,5 +1,6 @@
 package it.sistinf.headnet.dao;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
@@ -139,10 +140,10 @@ public class HeadnetDao extends GestioneConnessione {
 		try {
 
 			connection = this.apriConnessione();
-			preparedStatement = connection.prepareStatement("INSERT INTO POST (contenuto, dataPubblicazione, user_id) VALUES (?, ?, ?)");
+			preparedStatement = connection.prepareStatement("INSERT INTO POST (contenuto, dataPubblicazione, user_id) VALUES (?, NOW(), ?)");
 			preparedStatement.setString(1, post.getContenuto());
-			preparedStatement.setDate(2, new java.sql.Date(post.getDataPubblicazione().getTime()));
-			preparedStatement.setInt(3, post.getUser().getId());
+//			preparedStatement.setDate(2, (Date) post.getDataPubblicazione());
+			preparedStatement.setInt(2, post.getUser().getId());
 			
 			preparedStatement.executeUpdate();
 
@@ -227,6 +228,33 @@ public class HeadnetDao extends GestioneConnessione {
         return richiesteRicevute;    
 
     }
+	
+	public boolean controllaRichiesteRicevute(RichiestaVO richiesta) {
+
+        boolean trovato = false;
+
+        try {
+            connection = this.apriConnessione();
+            String queryStr = "SELECT u.user_id , u.username, u.nome, u.cognome, r.richiesta_id FROM user as u JOIN richiesta_amicizia as r ON r.user_richiedente = u.user_id WHERE r.stato = 's' AND r.user_ricevente = ? AND r.user_richiedente = ?";
+            preparedStatement = connection.prepareStatement(queryStr);
+            preparedStatement.setInt(1, richiesta.getRichiedente().getId() );
+            preparedStatement.setInt(2, richiesta.getRicevente().getId() );
+            resultSet = preparedStatement.executeQuery();
+            
+            while(resultSet.next()) {
+                trovato = true;
+            }    
+            
+    }
+
+        catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            chiudiConnessione();
+        }
+        return trovato;    
+
+    }
     
     
     public List<RichiestaVO> cercaRichiesteInviate(RichiestaVO richiesta) {
@@ -261,6 +289,33 @@ public class HeadnetDao extends GestioneConnessione {
             chiudiConnessione();
         }
         return richiesteInviate;    
+
+    }
+    
+    public boolean controllaRichiesteInviate(RichiestaVO richiesta) {
+
+        boolean trovato = false;
+
+        try {
+            connection = this.apriConnessione();
+            String queryStr = "SELECT u.user_id , u.username, u.nome, u.cognome, r.richiesta_id FROM user as u JOIN richiesta_amicizia as r ON r.user_ricevente = u.user_id WHERE r.stato = 's' AND r.user_richiedente = ? AND r.user_ricevente = ?";
+            preparedStatement = connection.prepareStatement(queryStr);
+            preparedStatement.setInt(1, richiesta.getRichiedente().getId() );
+            preparedStatement.setInt(2, richiesta.getRicevente().getId() );
+            resultSet = preparedStatement.executeQuery();
+            
+            while(resultSet.next()) {
+                trovato = true;
+            }    
+            
+    }
+
+        catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            chiudiConnessione();
+        }
+        return trovato;    
 
     }
 
@@ -303,6 +358,43 @@ public class HeadnetDao extends GestioneConnessione {
         return amici;    
 
     }
+    
+    public boolean controllaAmicizie(RichiestaVO richiesta) {
+
+    	boolean trovato = false;
+
+        try {
+            connection = this.apriConnessione();
+            StringBuilder queryStr = new StringBuilder();
+            queryStr.append("SELECT u.user_id, u.username, u.nome, u.cognome "); 
+            queryStr.append("FROM user AS u JOIN richiesta_amicizia AS r ON u.user_id=r.user_richiedente ");
+            queryStr.append("WHERE r.stato = 'a' AND r.user_ricevente = ? AND r.user_richiedente = ? ");
+            queryStr.append("UNION SELECT u.user_id, u.username, u.nome, u.cognome ");
+            queryStr.append("FROM user AS u JOIN richiesta_amicizia as r ON u.user_id=r.user_ricevente  ");
+            queryStr.append("WHERE r.stato = 'a' AND r.user_richiedente = ? AND r.user_ricevente = ? ");
+            preparedStatement = connection.prepareStatement(queryStr.toString());
+            preparedStatement.setInt(1, richiesta.getRichiedente().getId());
+            preparedStatement.setInt(2, richiesta.getRicevente().getId());
+            preparedStatement.setInt(3, richiesta.getRichiedente().getId());
+            preparedStatement.setInt(4, richiesta.getRicevente().getId());
+           
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            while(resultSet.next()) {
+                trovato = true;
+            }    
+            
+    }
+
+        catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            chiudiConnessione();
+        }
+        return trovato;    
+
+    }
 
     public List<PostVO> mieiPost(UserVO user) {
 
@@ -310,7 +402,7 @@ public class HeadnetDao extends GestioneConnessione {
 
         try {
             connection = this.apriConnessione();
-            String queryStr = "SELECT p.post_id , p.contenuto, p.dataPubblicazione, u.username FROM post p JOIN user u ON u.user_id = p.user_id WHERE  p.user_id = ?";
+            String queryStr = "SELECT p.post_id , p.contenuto, p.dataPubblicazione, u.username FROM post p JOIN user u ON u.user_id = p.user_id WHERE  p.user_id = ? ORDER BY p.dataPubblicazione DESC";
             preparedStatement = connection.prepareStatement(queryStr);
             preparedStatement.setInt(1, user.getId() );
             resultSet = preparedStatement.executeQuery();
@@ -320,7 +412,7 @@ public class HeadnetDao extends GestioneConnessione {
                 UserVO userp = new UserVO();
                 postSing.setId(resultSet.getInt("post_id"));     
                 postSing.setContenuto(resultSet.getString("contenuto"));
-                postSing.setDataPubblicazione(resultSet.getDate("dataPubblicazione"));
+                postSing.setDataPubblicazione(resultSet.getTimestamp("dataPubblicazione"));
                 postSing.setUser(userp);
                 postSing.getUser().setUsername(resultSet.getString("username"));
                 System.err.println("USER: "+ postSing.getUser().getUsername()); 
@@ -370,7 +462,7 @@ public class HeadnetDao extends GestioneConnessione {
                 UserVO userp = new UserVO();
                 postSing.setId(resultSet.getInt("post_id"));     
                 postSing.setContenuto(resultSet.getString("contenuto"));
-                postSing.setDataPubblicazione(resultSet.getDate("dataPubblicazione"));
+                postSing.setDataPubblicazione(resultSet.getTimestamp("dataPubblicazione"));
                 postSing.setUser(userp);
                 postSing.getUser().setId(resultSet.getInt("user_id"));
                 postSing.getUser().setUsername(resultSet.getString("username"));
