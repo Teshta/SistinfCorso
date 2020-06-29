@@ -49,7 +49,7 @@ public class InserisciPostServlet extends HttpServlet {
 			user = (UserVO)sessione.getAttribute("USER"); 
 			post.setUser(user);
 
-			request.setAttribute("INSERENDO", post);
+//			request.setAttribute("INSERENDO", post);
 
 			if(contenuto==null || contenuto.isEmpty()) {
 				request.setAttribute("MSG_KO", "Devi inserire il contenuto");

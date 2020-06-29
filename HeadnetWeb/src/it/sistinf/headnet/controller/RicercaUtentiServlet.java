@@ -16,7 +16,7 @@ import it.sistinf.headnet.facade.HeadnetFacadeImpl;
 
 
 @WebServlet("/search")
-public class CercaServlet extends HttpServlet {
+public class RicercaUtentiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 

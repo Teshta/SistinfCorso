@@ -29,12 +29,15 @@
 				<tr>
 					<td>
 						<div class="container-fluid">
-							<h1>${post.user.username}</h1>
-							<p>${post.contenuto }</p>
+							<h1>${post.user.username}</h1> 
+							<p>${post.contenuto}</p>
 							<p>Pubblicato il: ${post.dataPubblicazione}</p>
-							<a class="btn btn-primary" href="${pageContext.servletContext.contextPath}/like?idPost=${post.id}&proprietario=${post.user.id}">
-  <i class="fa fa-glass  pull-left"></i> Like </a>
-  							 Numero di like:${post.like}
+							<a class="btn btn-primary btn-sm"
+									href="${pageContext.servletContext.contextPath}/like?idPost=${post.id}&proprietario=${post.user.id}">
+									<i class="fa fa-glass  pull-left"></i> Like
+								</a> <a class="btn btn-default btn-sm"> <i class="fa fa-heart"></i>
+									Numero di like:${post.like}
+								</a>
 						</div>
 					</td>
 				</tr>

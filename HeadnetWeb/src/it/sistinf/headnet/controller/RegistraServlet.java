@@ -75,11 +75,14 @@ public class RegistraServlet extends HttpServlet{
 				request.setAttribute("MSG_CORRECT", "L'inserimento è andato a buon fine");
 			}
 			catch(SQLException e) {
+				e.printStackTrace();
 				request.setAttribute("MSG_KO", "L'inserimento non è andato a buon fine");
+				request.getRequestDispatcher("/jsp/registra.jsp").forward(request, response);
 			}
 		}
 
 		request.getRequestDispatcher("index.jsp").forward(request, response);
+//		response.sendRedirect("");
 	}
 
 

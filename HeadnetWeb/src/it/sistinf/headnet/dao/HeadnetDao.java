@@ -402,7 +402,7 @@ public class HeadnetDao extends GestioneConnessione {
 
         try {
             connection = this.apriConnessione();
-            String queryStr = "SELECT p.post_id , p.contenuto, p.dataPubblicazione, u.username FROM post p JOIN user u ON u.user_id = p.user_id WHERE  p.user_id = ? ORDER BY p.dataPubblicazione DESC";
+            String queryStr = "SELECT p.post_id , p.contenuto, p.dataPubblicazione, p.user_id, u.username FROM post p JOIN user u ON u.user_id = p.user_id WHERE  p.user_id = ? ORDER BY p.dataPubblicazione DESC";
             preparedStatement = connection.prepareStatement(queryStr);
             preparedStatement.setInt(1, user.getId() );
             resultSet = preparedStatement.executeQuery();
@@ -414,6 +414,7 @@ public class HeadnetDao extends GestioneConnessione {
                 postSing.setContenuto(resultSet.getString("contenuto"));
                 postSing.setDataPubblicazione(resultSet.getTimestamp("dataPubblicazione"));
                 postSing.setUser(userp);
+                postSing.getUser().setId(resultSet.getInt("user_id"));
                 postSing.getUser().setUsername(resultSet.getString("username"));
                 System.err.println("USER: "+ postSing.getUser().getUsername()); 
                 post.add(postSing);
