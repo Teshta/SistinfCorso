@@ -13,7 +13,7 @@
 		<jsp:include page="messaggi.jsp"></jsp:include>
 		<h1>Registrati</h1>
 		<form
-			action="${pageContext.servletContext.contextPath}/registra"
+			action="${pageContext.servletContext.contextPath}/registra2.do"
 			method="post" id="regForm">
 			<div class="form-group">
 				<label for="nome">Nome:</label> <input type="text"
